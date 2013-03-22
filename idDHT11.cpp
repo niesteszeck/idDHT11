@@ -23,12 +23,12 @@ void idDHT11::init(int pin, int intNumber, void (*callback_wrapper) ()) {
 	temp = 0;
 	pinMode(pin, OUTPUT);
 	digitalWrite(pin, HIGH);
-	state = STOPED;
+	state = STOPPED;
 	status = IDDHTLIB_ERROR_NOTSTARTED;
 }
 
 int idDHT11::acquire() {
-	if (state == STOPED || state == ACQUIRED) {
+	if (state == STOPPED || state == ACQUIRED) {
 		
 		//set the state machine for interruptions analisis of the signal
 		state = RESPONSE;
@@ -62,7 +62,7 @@ void idDHT11::isrCallback() {
 	us = newUs;
 	if (delta>6000) {
 		status = IDDHTLIB_ERROR_TIMEOUT;
-		state = STOPED;
+		state = STOPPED;
 		detachInterrupt(intNumber);
 		return;
 	}
@@ -75,14 +75,14 @@ void idDHT11::isrCallback() {
 			} else {
 				detachInterrupt(intNumber);
 				status = IDDHTLIB_ERROR_TIMEOUT;
-				state = STOPED;
+				state = STOPPED;
 			}
 			break;
 		case DATA:
 			if(delta<10) {
 				detachInterrupt(intNumber);
 				status = IDDHTLIB_ERROR_DELTA;
-				state = STOPED;
+				state = STOPPED;
 				// return;
 			} else if(60<delta && delta<135) { //valid in timing
 				if(delta>90) //is a one
@@ -98,7 +98,7 @@ void idDHT11::isrCallback() {
 							uint8_t sum = bits[0] + bits[2];  
 							if (bits[4] != sum) {
 								status = IDDHTLIB_ERROR_CHECKSUM;
-								state = STOPED;
+								state = STOPPED;
 							} else {
 								status = IDDHTLIB_OK;
 								state = ACQUIRED;
@@ -109,7 +109,7 @@ void idDHT11::isrCallback() {
 			} else {
 				detachInterrupt(intNumber);
 				status = IDDHTLIB_ERROR_TIMEOUT;
-				state = STOPED;
+				state = STOPPED;
 			}
 			break;
 		default:
@@ -117,7 +117,7 @@ void idDHT11::isrCallback() {
 	}
 }
 bool idDHT11::acquiring() {
-	if (state != ACQUIRED && state != STOPED)
+	if (state != ACQUIRED && state != STOPPED)
 		return true;
 	return false;
 }

@@ -33,7 +33,7 @@
 #define IDDHTLIB_ERROR_DELTA		-4
 #define IDDHTLIB_ERROR_NOTSTARTED	-5
 
-#define IDDHT11_CHECK_STATE		if(state == STOPED)													\
+#define IDDHT11_CHECK_STATE		if(state == STOPPED)													\
 									return status;													\
 								else if(state != ACQUIRED)				\
 									return IDDHTLIB_ERROR_ACQUIRING;
@@ -58,7 +58,7 @@ private:
 	
 	void (*isrCallback_wrapper)(void);
 	
-	enum states{RESPONSE=0,DATA=1,ACQUIRED=2,STOPED=3,ACQUIRING=4};
+	enum states{RESPONSE=0,DATA=1,ACQUIRED=2,STOPPED=3,ACQUIRING=4};
 	volatile states state;
 	volatile int status;
 	volatile byte bits[5];
