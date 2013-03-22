@@ -1,0 +1,39 @@
+#######################################
+# Syntax Coloring Map For Messenger
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+init	KEYWORD2
+acquire	KEYWORD2
+getCelsius	KEYWORD2
+getFahrenheit	KEYWORD2
+getKelvin	KEYWORD2
+getDewPoint	KEYWORD2
+getDewPointSlow	KEYWORD2
+getHumidity	KEYWORD2
+acquiring	KEYWORD2
+getStatus	KEYWORD2
+#######################################
+# Instances (KEYWORD2)
+#######################################
+idDHT11	KEYWORD2
+#######################################
+# Constants (LITERAL1)
+#######################################
+IDDHTLIB_OK	LITERAL1
+IDDHTLIB_ACQUIRING	LITERAL1
+IDDHTLIB_ACQUIRED	LITERAL1
+IDDHTLIB_RESPONSE_OK	LITERAL1
+IDDHTLIB_ERROR_CHECKSUM	LITERAL1
+IDDHTLIB_ERROR_TIMEOUT	LITERAL1
+IDDHTLIB_ERROR_ACQUIRING	LITERAL1
+IDDHTLIB_ERROR_DELTA	LITERAL1
+IDDHTLIB_ERROR_NOTSTARTED	LITERAL1
