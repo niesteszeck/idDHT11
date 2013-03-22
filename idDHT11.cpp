@@ -68,9 +68,10 @@ void idDHT11::isrCallback() {
 	}
 	switch(state) {
 		case RESPONSE:
-			if(delta<25)
-				return; //do nothing, it started the response signal
-			if(125<delta && delta<170) {
+			if(delta<25){
+				us -= delta;
+				break; //do nothing, it started the response signal
+			} if(125<delta && delta<190) {
 				state = DATA;
 			} else {
 				detachInterrupt(intNumber);
@@ -83,7 +84,6 @@ void idDHT11::isrCallback() {
 				detachInterrupt(intNumber);
 				status = IDDHTLIB_ERROR_DELTA;
 				state = STOPPED;
-				// return;
 			} else if(60<delta && delta<135) { //valid in timing
 				if(delta>90) //is a one
 					bits[idx] |= (1 << cnt);
