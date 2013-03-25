@@ -45,6 +45,7 @@ public:
     void init(int pin, int intNumber,void (*isrCallback_wrapper)());
 	void isrCallback();
 	int acquire();
+	int acquireAndWait();
 	float getCelsius();
 	float getFahrenheit();
 	float getKelvin();

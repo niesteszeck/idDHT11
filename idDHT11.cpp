@@ -56,6 +56,12 @@ int idDHT11::acquire() {
 	} else
 		return IDDHTLIB_ERROR_ACQUIRING;
 }
+int idDHT11::acquireAndWait() {
+	acquire();
+	while(acquiring())
+		;
+	return getStatus();
+}
 void idDHT11::isrCallback() {
 	int newUs = micros();
 	int delta = (newUs-us);
