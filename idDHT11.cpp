@@ -1,11 +1,17 @@
 /*
 	FILE: 		idDHT11.cpp
-	VERSION: 	0.1
+	VERSION: 	0.1.1
 	PURPOSE: 	Interrupt driven Lib for DHT11 with Arduino.
 	LICENCE:	GPL v3 (http://www.gnu.org/licenses/gpl.html)
 	DATASHEET: http://www.micro4you.com/files/sensor/DHT11.pdf
 	
 	Based on DHT11 library: http://playground.arduino.cc/Main/DHT11Lib
+	
+	Changelog:
+		v 0.1
+			First version, added Functionality to DHT11 sensor
+		v 0.1.1
+			Optimizacion on shift var (pylon from Arduino Forum)
 */
 
 #include "idDHT11.h"
@@ -91,8 +97,9 @@ void idDHT11::isrCallback() {
 				status = IDDHTLIB_ERROR_DELTA;
 				state = STOPPED;
 			} else if(60<delta && delta<135) { //valid in timing
+				bits[idx] <<= 1;
 				if(delta>90) //is a one
-					bits[idx] |= (1 << cnt);
+					bits[idx] |= 1;
 				if (cnt == 0) {  // whe have fullfilled the byte, go to next
 						cnt = 7;    // restart at MSB
 						if(idx++ == 4) {      // go to next byte, if whe have got 5 bytes stop.
