@@ -90,7 +90,7 @@ void idDHT11::isrCallback() {
 				detachInterrupt(intNumber);
 				status = IDDHTLIB_ERROR_DELTA;
 				state = STOPPED;
-			} else if(60<delta && delta<135) { //valid in timing
+			} else if(60<delta && delta<155) { //valid in timing
 				if(delta>90) //is a one
 					bits[idx] |= (1 << cnt);
 				if (cnt == 0) {  // whe have fullfilled the byte, go to next
