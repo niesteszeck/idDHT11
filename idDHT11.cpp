@@ -67,7 +67,7 @@ void idDHT11::isrCallback() {
 	int delta = (newUs-us);
 	us = newUs;
 	if (delta>6000) {
-		status = IDDHTLIB_ERROR_TIMEOUT;
+		status = IDDHTLIB_ERROR_ISR_TIMEOUT;
 		state = STOPPED;
 		detachInterrupt(intNumber);
 		return;
@@ -81,7 +81,7 @@ void idDHT11::isrCallback() {
 				state = DATA;
 			} else {
 				detachInterrupt(intNumber);
-				status = IDDHTLIB_ERROR_TIMEOUT;
+				status = IDDHTLIB_ERROR_RESPONSE_TIMEOUT;
 				state = STOPPED;
 			}
 			break;
@@ -114,7 +114,7 @@ void idDHT11::isrCallback() {
 				} else cnt--;
 			} else {
 				detachInterrupt(intNumber);
-				status = IDDHTLIB_ERROR_TIMEOUT;
+				status = IDDHTLIB_ERROR_DATA_TIMEOUT;
 				state = STOPPED;
 			}
 			break;
