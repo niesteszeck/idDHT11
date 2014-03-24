@@ -12,7 +12,7 @@ int idDHT11pin = 2; //Digital pin for comunications
 int idDHT11intNumber = 0; //interrupt number (must be the one that use the previus defined pin (see table above)
 
 //declaration
-void dht11_wrapper();
+void dht11_wrapper(); // must be declared before the lib initialization
 
 // Lib instantiate
 idDHT11 DHT11(idDHT11pin,idDHT11intNumber,dht11_wrapper);
@@ -25,6 +25,8 @@ void setup()
   Serial.println(IDDHT11LIB_VERSION);
   Serial.println("---------------");
 }
+// This wrapper is in charge of calling 
+// mus be defined like this for the lib work
 void dht11_wrapper() {
   DHT11.isrCallback();
 }
@@ -45,8 +47,14 @@ void loop()
   case IDDHTLIB_ERROR_CHECKSUM: 
     Serial.println("Error\n\r\tChecksum error"); 
     break;
-  case IDDHTLIB_ERROR_TIMEOUT: 
-    Serial.println("Error\n\r\tTime out error"); 
+  case IDDHTLIB_ERROR_ISR_TIMEOUT: 
+    Serial.println("Error\n\r\tISR Time out error"); 
+    break;
+  case IDDHTLIB_ERROR_RESPONSE_TIMEOUT: 
+    Serial.println("Error\n\r\tResponse time out error"); 
+    break;
+  case IDDHTLIB_ERROR_DATA_TIMEOUT: 
+    Serial.println("Error\n\r\tData time out error"); 
     break;
   case IDDHTLIB_ERROR_ACQUIRING: 
     Serial.println("Error\n\r\tAcquiring"); 
