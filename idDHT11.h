@@ -1,5 +1,5 @@
 /*
-	FILE: 		idDHT11.h
+	FILE: 		idDHT11.h2
 	VERSION: 	0.1
 	PURPOSE: 	Interrupt driven Lib for DHT11 with Arduino.
 	LICENCE:	GPL v3 (http://www.gnu.org/licenses/gpl.html)
